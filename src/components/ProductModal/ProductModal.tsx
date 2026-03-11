@@ -1,4 +1,4 @@
-import { useEffect, type MouseEvent } from "react";
+import { useEffect, useRef, type MouseEvent, type SyntheticEvent } from "react";
 import type { Product } from "../../types/product";
 import "./ProductModal.css";
 
@@ -17,55 +17,62 @@ function formatPrice(price: number) {
 }
 
 export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
+    const dialogRef = useRef<HTMLDialogElement | null>(null);
+
     useEffect(() => {
-        if (!isOpen) {
+        const dialog = dialogRef.current;
+
+        if (!dialog) {
             return;
         }
 
-        const previousOverflow = document.body.style.overflow;
-
-        const handleKeyDown = (event: KeyboardEvent) => {
-            if (event.key === "Escape") {
-                onClose();
+        if (isOpen && product) {
+            if (!dialog.open) {
+                dialog.showModal();
             }
-        };
-
-        document.body.style.overflow = "hidden";
-        document.addEventListener("keydown", handleKeyDown);
+        } else if (dialog.open) {
+            dialog.close();
+        }
 
         return () => {
-            document.body.style.overflow = previousOverflow;
-            document.removeEventListener("keydown", handleKeyDown);
+            if (dialog.open) {
+                dialog.close();
+            }
         };
-    }, [isOpen, onClose]);
+    }, [isOpen, product]);
 
     if (!isOpen || !product) {
         return null;
     }
 
-    const handleBackdropClick = (event: MouseEvent<HTMLDivElement>) => {
+    const handleBackdropClick = (event: MouseEvent<HTMLDialogElement>) => {
         if (event.target === event.currentTarget) {
             onClose();
         }
     };
 
+    const handleCancel = (event: SyntheticEvent<HTMLDialogElement, Event>) => {
+        event.preventDefault();
+        onClose();
+    };
+
     return (
-        <div
+        <dialog
+            ref={dialogRef}
             className="product-modal"
-            role="presentation"
             onClick={handleBackdropClick}
+            onCancel={handleCancel}
+            aria-labelledby="product-modal-title"
         >
             <section
                 className="product-modal__dialog"
-                role="dialog"
-                aria-modal="true"
-                aria-labelledby="product-modal-title"
             >
                 <button
                     className="product-modal__close"
                     type="button"
                     onClick={onClose}
                     aria-label="Закрыть"
+                    autoFocus
                 >
                     X
                 </button>
@@ -97,6 +104,6 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
                     </button>
                 </div>
             </section>
-        </div>
+        </dialog>
     );
 }
