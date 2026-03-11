@@ -1,0 +1,28 @@
+.catalog-page {
+    width: min(1120px, 100% - 2rem);
+    margin: 0 auto;
+    padding: 1.5rem 0 2.5rem;
+}
+
+.catalog-page__header {
+    display: grid;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.catalog-page__title {
+    margin: 0;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    line-height: 1.1;
+    color: #101828;
+}
+
+.catalog-page__controls {
+    margin-bottom: 1.25rem;
+}
+
+.catalog-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
