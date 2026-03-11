@@ -17,18 +17,15 @@
     transition: border-color 0.2s ease;
 }
 
-.product-card__action:disabled {
-    cursor: default;
-}
-
-.product-card__action:not(:disabled):hover {
+.product-card__action:hover {
     border-color: #ffbc13;
 }
 
 .product-card__image {
     width: 100%;
     aspect-ratio: 4 / 3;
-    object-fit: cover;
+    border: 1px solid #000000;
+    object-fit: contain;
 }
 
 .product-card__content {

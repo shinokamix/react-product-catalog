@@ -21,6 +21,8 @@ function isDummyJsonProduct(value: unknown): value is DummyJsonProduct {
         typeof value.price === "number" &&
         typeof value.category === "string" &&
         typeof value.thumbnail === "string" &&
+        Array.isArray(value.images) &&
+        value.images.every((item) => typeof item === "string") &&
         typeof value.description === "string"
     );
 }
@@ -48,6 +50,7 @@ function mapProduct(item: DummyJsonProduct): Product {
         price: item.price,
         category: item.category,
         image: item.thumbnail,
+        modalImage: item.images[0] ?? item.thumbnail,
         description: item.description,
     };
 }

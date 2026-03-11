@@ -4,6 +4,7 @@ export type Product = {
     price: number;
     category: string;
     image: string;
+    modalImage: string;
     description: string;
 };
 
@@ -20,6 +21,7 @@ export type DummyJsonProduct = {
     price: number;
     category: string;
     thumbnail: string;
+    images: string[];
     description: string;
 };
 

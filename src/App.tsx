@@ -1,13 +1,18 @@
 import { useMemo, useState } from "react";
 import { ProductCard } from "./components/ProductCard/ProductCard";
+import { ProductModal } from "./components/ProductModal/ProductModal";
 import { SearchBar } from "./components/SearchBar/SearchBar";
 import "./App.css";
 import { useProducts } from "./hooks/useProducts";
 import useDebounce from "./hooks/useDebounce";
+import type { Product } from "./types/product";
 
 function App() {
     const { products, loading, error } = useProducts();
     const [searchValue, setSearchValue] = useState("");
+    const [selectedProduct, setSelectedProduct] = useState<Product | null>(
+        null,
+    );
     const debouncedSearchValue = useDebounce(searchValue, 200);
 
     const filteredProducts = useMemo(() => {
@@ -63,10 +68,16 @@ function App() {
                         title={product.title}
                         price={product.price}
                         image={product.image}
-                        onClick={() => undefined}
+                        onClick={() => setSelectedProduct(product)}
                     />
                 ))}
             </section>
+
+            <ProductModal
+                product={selectedProduct}
+                isOpen={selectedProduct !== null}
+                onClose={() => setSelectedProduct(null)}
+            />
         </main>
     );
 }

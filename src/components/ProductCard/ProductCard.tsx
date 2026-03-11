@@ -8,9 +8,9 @@ type ProductCardProps = {
 };
 
 function formatPrice(price: number) {
-    return new Intl.NumberFormat("ru-RU", {
+    return new Intl.NumberFormat("en-US", {
         style: "currency",
-        currency: "RUB",
+        currency: "USD",
         maximumFractionDigits: 0,
     }).format(price);
 }
