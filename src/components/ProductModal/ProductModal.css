@@ -13,7 +13,7 @@
     position: relative;
     width: min(680px, 100%);
     max-height: calc(100dvh - 1rem);
-    overflow: hidden;
+    overflow: auto;
     border: 1px solid #000000;
     background: #ffffff;
     display: grid;
@@ -79,10 +79,36 @@
     background: #ffbc13;
 }
 
-@media (width <= 480px) {
+@media (width <= 768px) {
+    .product-modal {
+        padding: 0.875rem;
+    }
+
     .product-modal__dialog {
+        width: min(620px, 100%);
+        max-height: calc(100dvh - 1.75rem);
+        padding: 0.875rem;
+        gap: 0.875rem;
+    }
+
+    .product-modal__title {
+        font-size: 1.3rem;
+    }
+}
+
+@media (width <= 480px) {
+    .product-modal {
+        padding: 0.5rem;
+    }
+
+    .product-modal__dialog {
+        max-height: calc(100dvh - 1rem);
         padding: 0.75rem;
         gap: 0.75rem;
+    }
+
+    .product-modal__image {
+        aspect-ratio: 4 / 3;
     }
 
     .product-modal__title {

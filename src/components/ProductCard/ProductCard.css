@@ -58,3 +58,34 @@
     font-weight: 700;
     color: #666666;
 }
+
+@media (width <= 768px) {
+    .product-card__action {
+        gap: 0.625rem;
+        padding: 0.625rem;
+    }
+
+    .product-card__title {
+        font-size: 0.95rem;
+        line-height: 1.2rem;
+        min-height: calc(1.2rem * 2);
+    }
+
+    .product-card__price {
+        font-size: 0.9rem;
+    }
+}
+
+@media (width <= 480px) {
+    .product-card__action {
+        padding: 0.5rem;
+    }
+
+    .product-card__image {
+        aspect-ratio: 1 / 1;
+    }
+
+    .product-card__title {
+        font-size: 0.93rem;
+    }
+}

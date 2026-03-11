@@ -16,3 +16,27 @@
     background: #ffffff;
     color: #101828;
 }
+
+@media (width <= 768px) {
+    .search-bar__label {
+        font-size: 0.85rem;
+    }
+
+    .search-bar__input {
+        padding: 0.7rem 0.8rem;
+    }
+}
+
+@media (width <= 480px) {
+    .search-bar {
+        gap: 0.4rem;
+    }
+
+    .search-bar__label {
+        font-size: 0.8rem;
+    }
+
+    .search-bar__input {
+        padding: 0.625rem 0.75rem;
+    }
+}

@@ -24,5 +24,48 @@
 .catalog-grid {
     display: grid;
     gap: 1rem;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (width <= 768px) {
+    .catalog-page {
+        width: min(1120px, 100% - 1.5rem);
+        padding: 1.25rem 0 2rem;
+    }
+
+    .catalog-page__header {
+        margin-bottom: 1rem;
+    }
+
+    .catalog-page__controls {
+        margin-bottom: 1rem;
+    }
+
+    .catalog-grid {
+        gap: 0.875rem;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (width <= 480px) {
+    .catalog-page {
+        width: min(1120px, 100% - 1rem);
+        padding: 1rem 0.125rem 1.5rem;
+    }
+
+    .catalog-page__title {
+        font-size: clamp(1.5rem, 7vw, 1.9rem);
+    }
+
+    .catalog-grid {
+        gap: 0.75rem;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (width <= 320px) {
+    .catalog-grid {
+        gap: 0.625rem;
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
 }
