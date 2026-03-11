@@ -1,12 +1,24 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { ProductCard } from "./components/ProductCard/ProductCard";
 import { SearchBar } from "./components/SearchBar/SearchBar";
 import "./App.css";
 import { useProducts } from "./hooks/useProducts";
+import useDebounce from "./hooks/useDebounce";
 
 function App() {
     const { products, loading, error } = useProducts();
     const [searchValue, setSearchValue] = useState("");
+    const debouncedSearchValue = useDebounce(searchValue, 200);
+
+    const filteredProducts = useMemo(() => {
+        const query = debouncedSearchValue.trim().toLowerCase();
+
+        if (!query) return products;
+
+        return products.filter((product) =>
+            product.title.toLowerCase().includes(query),
+        );
+    }, [products, debouncedSearchValue]);
 
     if (loading) {
         return (
@@ -45,7 +57,7 @@ function App() {
                 className="catalog-grid"
                 aria-label="Список товаров"
             >
-                {products.map((product) => (
+                {filteredProducts.map((product) => (
                     <ProductCard
                         key={product.id}
                         title={product.title}
